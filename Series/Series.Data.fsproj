@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Entities.fs" />
+    <Compile Include="SeriesContext.fs" />
+    <Compile Include="SeriesRepository.fs" />
+    <Compile Include="SeriesData.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.5.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.3" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Prelude\Prelude.fsproj" />
+  </ItemGroup>
+
+</Project>
