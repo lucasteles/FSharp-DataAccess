@@ -10,14 +10,12 @@ module SerieRepository =
         context
             .Series
             .Include(fun s -> s.Episodes)
-            .AsNoTracking()
             .FirstOrDefault (fun f -> f.Id = id)
             |> Option.mapIfNull
 
     let getEpisodesOfSerie (context: SerieContext) serieId =
         context
              .Episodes
-             .AsNoTracking()
              .Include(fun e -> e.Serie)
              .Where(fun e -> e.SerieId = serieId )
              |> List.ofSeq
