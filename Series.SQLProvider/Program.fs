@@ -4,12 +4,7 @@ open System.Linq
 open FSharp.Data.Sql
 open Series.Data
 
-//let changeName (s: Serie) =
-//    let news = { s with Name = s.Name + "!" }
-//    updateSerie news
-
-let log (x:string) = Console.WriteLine x
-
+let log  = printfn "%s"
 
 [<EntryPoint>]
 let main _ =
@@ -21,7 +16,6 @@ let main _ =
             Status = EpisodeStatus.Scheduled
             Name = "The start of the first beginning intro"
             Description = "This episode explains everything"
-            Serie = None
         }]
 
     let newSerie = {
@@ -35,11 +29,11 @@ let main _ =
     log "Add a serie with an episode"
     let otherSerie = SeriesRepository.addSerie newSerie
 
-    log "Retrieving the newly added episode"
-    let serie = SeriesRepository.getSerie otherSerie.Id
-    match serie with
-    | Some s -> printfn "%s" s.Name
-    | _ -> ()
+    //log "Retrieving the newly added episode"
+    //let serie = SeriesRepository.getSerie otherSerie.Id
+    //match serie with
+    //| Some s -> printfn "%s" s.Name
+    //| _ -> ()
 
     //log "Retrieving the episodes of a serie"
     //let episodes = getEpisodesOfSerie newSerie.Id
@@ -60,8 +54,6 @@ let main _ =
 
     //log "Add a serie with an episode... Synchronously"
     //addSerieAsync newSerie |> Async.RunSynchronously |> ignore
-
-
 
     log "Press any key to exit"
     Console.ReadKey() |> ignore

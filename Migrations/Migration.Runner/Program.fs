@@ -4,16 +4,17 @@ open FluentMigrator.Runner
 open Microsoft.Extensions.DependencyInjection
 
 open Migrations
-
+let conn = @"Server=localhost;Database=SeriesDB;User=sa;Password=Senha@123;"
 let createServices() =
         (new ServiceCollection())
             .AddFluentMigratorCore()
-            .ConfigureRunner(fun rb ->
-                               rb.AddSqlServer()
-                                 .WithGlobalConnectionString(@"Server=(localdb)\MSSQLLocalDB;Database=SeriesDB;Integrated Security=True;MultipleActiveResultSets=True")
-                                 .ScanIn( (typedefof<EpisodesMigration>).Assembly)
-                                 .For.Migrations
-                                 |> ignore)
+            .ConfigureRunner(
+                fun rb ->
+                   rb.AddSqlServer()
+                     .WithGlobalConnectionString(conn)
+                     .ScanIn( (typedefof<EpisodesMigration>).Assembly)
+                     .For.Migrations
+                     |> ignore)
             .AddLogging(fun lb -> lb.AddFluentMigratorConsole() |> ignore)
             .BuildServiceProvider(false)
             :> IServiceProvider

@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Playground.fsx" />
     <Compile Include="Entities.fs" />
     <Compile Include="DbContext.fs" />
     <Compile Include="SeriesRepository.fs" />
@@ -13,13 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="4.5.2" />
-    <PackageReference Include="FSharp.Data" Version="3.0.0-beta4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="2.0.3" />
-    <PackageReference Include="SQLProvider" Version="1.1.48" />
-
+    <PackageReference Update="FSharp.Core" Version="4.7.2" />
+    <PackageReference Include="FSharp.Data" Version="3.3.3" />
+   <PackageReference Include="SQLProvider" Version="1.1.93" />
+   <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
 </Project>

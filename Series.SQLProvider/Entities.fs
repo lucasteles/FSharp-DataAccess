@@ -1,11 +1,8 @@
 namespace Series.Data
 
-
 type EpisodeStatus =
   | Scheduled = 0
   | Aired = 1
-
-type EpisodeId = int
 
 type SerieStatus =
   | New = 0
@@ -13,20 +10,19 @@ type SerieStatus =
   | Ended = 2
 
 type SerieId = int
+type EpisodeId = int
 
-type [<CLIMutable>] Serie =
-  { Id: SerieId
-    Name: string
-    Description: string
-    Episodes: List<Episode>
-    Status: SerieStatus
-  }
-and [<CLIMutable>] Episode =
+type Episode =
   { Id: EpisodeId
     Number: int
     Season : int
     Name: string
     Description: string
-    Status: EpisodeStatus
-    Serie: Option<Serie>
-  }
+    Status: EpisodeStatus }
+
+type Serie =
+  { Id: SerieId
+    Name: string
+    Description: string
+    Episodes: Episode list
+    Status: SerieStatus }
