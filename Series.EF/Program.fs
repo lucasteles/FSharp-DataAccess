@@ -25,13 +25,22 @@ let main _ =
     let newSerie = {
         Id = 0
         Name = "Super duper serie"
-        Description = "Some description of this awesome serie"
+        Description = Some "Some description of this awesome serie"
         Episodes = episodes.ToList()
         Status = SerieStatus.New
     }
 
+    let newSerie2 = {
+        Id = 0
+        Name = "Bad serie"
+        Description = None
+        Episodes = [].ToList()
+        Status = SerieStatus.Ended
+    }
+
     log "Add a serie with an episode"
     addSerie newSerie
+    addSerie newSerie2
 
     log "Retrieving the newly added episode"
     let serie = getSerie newSerie.Id

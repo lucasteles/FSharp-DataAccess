@@ -11,7 +11,7 @@ type SeriesMigration() =
             .Create.Table("Series")
             .WithId()
             .WithColumn("Name").AsString(75).NotNullable()
-            .WithColumn("Description").AsMaxString().NotNullable()
+            .WithColumn("Description").AsMaxString().Nullable()
             .WithColumn("Status").AsString(25).NotNullable()
             |> ignore
 

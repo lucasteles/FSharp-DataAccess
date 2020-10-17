@@ -10,7 +10,7 @@ let private getContext () =
         |> ignore
     new SerieContext(optionsBuilder.Options)
 
-let private context = getContext()
+let context = getContext()
 
 let getSerie  = SerieRepository.getSerie context
 let getEpisodesOfSerie = SerieRepository.getEpisodesOfSerie context
@@ -19,7 +19,6 @@ let addSerieAsync = SerieRepository.addSerieAsync context
 let updateSerie = SerieRepository.updateSerie context
 let deleteSerie = SerieRepository.deleteSerie context
 let getSeriesWithAiredEpisodes = SerieRepository.getSeriesWithAiredEpisodes context
-
 let disposeContext () =
     use c = context
     ()

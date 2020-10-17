@@ -12,9 +12,20 @@ type SerieContext =
 
     override _.OnModelCreating modelBuilder =
 
+        let optionConverter = 
+            ValueConverter<_ option, _>(
+                (fun v -> Option.defaultValue null v), 
+                (fun v -> Some v)) 
+
         modelBuilder.Entity<Episode>()
             .Property(fun e -> e.Status)
             .HasConversion(EnumToStringConverter<EpisodeStatus>())
+            |> ignore
+
+        modelBuilder
+            .Entity<Serie>()
+            .Property(fun e -> e.Description)
+            .HasConversion(optionConverter)
             |> ignore
 
         modelBuilder
@@ -23,14 +34,15 @@ type SerieContext =
             .HasConversion(EnumToStringConverter<SerieStatus>())
             |> ignore
 
+
     [<DefaultValue>]
-    val mutable series: DbSet<Serie>
+    val mutable private series: DbSet<Serie>
     member x.Series
         with get() = x.series
         and set v = x.series <- v
 
     [<DefaultValue>]
-    val mutable episodes:DbSet<Episode>
+    val mutable private episodes:DbSet<Episode>
     member x.Episodes
         with get() = x.episodes
         and set v = x.episodes <- v

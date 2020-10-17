@@ -29,7 +29,7 @@ type [<CLIMutable>] Episode =
 type [<CLIMutable>] Serie =
   { Id: SerieId
     Name: string
-    Description: string
-    Episodes: List<Episode>
+    Description: string option
+    Episodes: Episode seq
     Status: SerieStatus
   }
