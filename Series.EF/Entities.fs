@@ -22,8 +22,7 @@ type [<CLIMutable>] Episode =
     Name: string
     Description: string
     Status: EpisodeStatus
-    SerieId: SerieId
-  }
+    SerieId: SerieId }
 
 
 type [<CLIMutable>] Serie =
@@ -31,5 +30,4 @@ type [<CLIMutable>] Serie =
     Name: string
     Description: string option
     Episodes: Episode seq
-    Status: SerieStatus
-  }
+    Status: SerieStatus }
