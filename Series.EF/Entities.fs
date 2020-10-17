@@ -8,22 +8,14 @@ type EpisodeStatus =
   | Aired = 1
 
 type EpisodeId = int
+type SerieId = int
 
 type SerieStatus =
   | New = 0
   | Running = 1
   | Ended = 2
 
-type SerieId = int
-
-type [<CLIMutable>] Serie =
-  { Id: SerieId
-    Name: string
-    Description: string
-    Episodes: List<Episode>
-    Status: SerieStatus
-  }
-and [<CLIMutable>] Episode =
+type [<CLIMutable>] Episode =
   { Id: EpisodeId
     Number: int
     Season : int
@@ -31,5 +23,13 @@ and [<CLIMutable>] Episode =
     Description: string
     Status: EpisodeStatus
     SerieId: SerieId
-    [<NotMapped>]Serie: Option<Serie>
+  }
+
+
+type [<CLIMutable>] Serie =
+  { Id: SerieId
+    Name: string
+    Description: string
+    Episodes: List<Episode>
+    Status: SerieStatus
   }

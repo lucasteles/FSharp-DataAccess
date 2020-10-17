@@ -16,15 +16,13 @@ module SerieRepository =
     let getEpisodesOfSerie (context: SerieContext) serieId =
         context
              .Episodes
-             .Include(fun e -> e.Serie)
              .Where(fun e -> e.SerieId = serieId )
              |> List.ofSeq
 
     let addSerieAsync (context: SerieContext) (entity: Serie) =
         async {
-            context.Series.AddAsync(entity) |> Async.AwaitTask |> ignore
+            context.Series.Add(entity) |> ignore
             context.SaveChangesAsync true |> Async.AwaitTask |> ignore
-            return entity
         }
 
     let addSerie (context: SerieContext) (entity: Serie) =
@@ -43,6 +41,6 @@ module SerieRepository =
     let getSeriesWithAiredEpisodes (context: SerieContext) =
         query {
             for serie in context.Series do
-                where (serie.Episodes.Exists (fun e -> e.Status = EpisodeStatus.Aired))
+                where (serie.Episodes.Any(fun e -> e.Status = EpisodeStatus.Aired))
                 select serie
         }

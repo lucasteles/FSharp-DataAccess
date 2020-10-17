@@ -20,7 +20,6 @@ let main _ =
             Name = "The start of the first beginning intro"
             Description = "This episode explains everything"
             SerieId = 0
-            Serie = None
         }]
 
     let newSerie = {

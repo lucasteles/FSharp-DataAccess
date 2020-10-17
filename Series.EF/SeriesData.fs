@@ -3,22 +3,23 @@ module SeriesData
 open Microsoft.EntityFrameworkCore
 open Series.Data
 
-let getContext =
+let private getContext () =
     let optionsBuilder = new DbContextOptionsBuilder<SerieContext>();
     optionsBuilder
-        .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=SeriesDB;Integrated Security=True;MultipleActiveResultSets=True")
+        .UseSqlServer(@"Server=localhost;Database=SeriesDB;User=sa;Password=Senha@123;MultipleActiveResultSets=True")
         |> ignore
-
     new SerieContext(optionsBuilder.Options)
 
-let getSerie  = SerieRepository.getSerie getContext
-let getEpisodesOfSerie = SerieRepository.getEpisodesOfSerie getContext
-let addSerie = SerieRepository.addSerie getContext
-let addSerieAsync = SerieRepository.addSerieAsync getContext
-let updateSerie = SerieRepository.updateSerie getContext
-let deleteSerie = SerieRepository.deleteSerie getContext
-let getSeriesWithAiredEpisodes = SerieRepository.getSeriesWithAiredEpisodes getContext
+let private context = getContext()
+
+let getSerie  = SerieRepository.getSerie context
+let getEpisodesOfSerie = SerieRepository.getEpisodesOfSerie context
+let addSerie = SerieRepository.addSerie context
+let addSerieAsync = SerieRepository.addSerieAsync context
+let updateSerie = SerieRepository.updateSerie context
+let deleteSerie = SerieRepository.deleteSerie context
+let getSeriesWithAiredEpisodes = SerieRepository.getSeriesWithAiredEpisodes context
 
 let disposeContext () =
-    use c = getContext
+    use c = context
     ()

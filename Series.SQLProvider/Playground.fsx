@@ -1,5 +1,7 @@
-﻿#r "bin/Debug/netcoreapp3.1/Fsharp.Data.SqlProvider.dll"
-#r "bin/Debug/netcoreapp3.1/Microsoft.Data.SqlClient.dll"
+﻿#r "bin/Debug/netcoreapp3.1/System.Data.SqlClient.dll"
+#r "bin/Debug/netcoreapp3.1/System.Data.Odbc.dll"
+#r "bin/Debug/netcoreapp3.1/System.Data.OleDb.dll"
+#r "bin/Debug/netcoreapp3.1/Fsharp.Data.SqlProvider.dll"
 
 open FSharp.Data.Sql
 [<Literal>]

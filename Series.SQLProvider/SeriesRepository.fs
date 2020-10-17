@@ -5,9 +5,25 @@ open System.Linq
 open System
 open Db
 
-module SeriesRepository =
+module private Mapping = 
+    let toEpisode (ep: EspisodesEntity) = 
+        { Id = ep.Id
+          Number = ep.Number
+          Season = ep.Season
+          Name = ep.Name
+          Description = ep.Description
+          Status = EpisodeStatus.Parse(ep.Status) }
 
-    let addSerie (entity: Serie) =
+    let toSerie (serie: SeriesEntity) = 
+        { Id = serie.Id
+          Name = serie.Name
+          Description = serie.Description
+          Episodes = serie.``dbo.Episodes by Id`` |> Seq.map toEpisode |> Seq.toList
+          Status = SerieStatus.Parse(serie.Status) }
+
+
+module SeriesRepository =
+    let addSerie (entity: Serie): Serie =
         let newSerie = context.Dbo.Series.Create(
                                 entity.Description,
                                 entity.Name,
@@ -24,13 +40,14 @@ module SeriesRepository =
                 e.Status.ToString()) |> ignore
 
         context.SubmitUpdates()
-        newSerie
+        Mapping.toSerie newSerie
 
     let getSerie (idSerie: SerieId) =
-        query {
+        let serie = query {
             for serie in context.Dbo.Series do
-            for ep in (!!) serie.``dbo.Episodes by Id`` do
+            //for ep in (!!) serie.``dbo.Episodes by Id`` do
                 where (serie.Id = idSerie)
-                select (serie, ep )
+                select serie
+                head
         }
-
+        Mapping.toSerie serie

@@ -29,8 +29,8 @@ let main _ =
     log "Add a serie with an episode"
     let otherSerie = SeriesRepository.addSerie newSerie
 
-    //log "Retrieving the newly added episode"
-    //let serie = SeriesRepository.getSerie otherSerie.Id
+    log "Retrieving the newly added episode"
+    let serie = SeriesRepository.getSerie otherSerie.Id
     //match serie with
     //| Some s -> printfn "%s" s.Name
     //| _ -> ()

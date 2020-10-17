@@ -7,33 +7,20 @@ open Prelude
 
 type SerieContext =
     inherit DbContext
-
     new() = { inherit DbContext() }
     new(options: DbContextOptions<SerieContext>) = { inherit DbContext(options) }
 
-    override __.OnModelCreating modelBuilder =
-
-        let esconvert =
-            ValueConverter<EpisodeStatus, string>(
-                (fun v -> v.ToString()),
-                (fun v -> Enum.Parse(typedefof<EpisodeStatus>, v) :?> EpisodeStatus)
-            )
+    override _.OnModelCreating modelBuilder =
 
         modelBuilder.Entity<Episode>()
-            .Property(fun e -> e.Status).HasConversion(esconvert)
+            .Property(fun e -> e.Status)
+            .HasConversion(EnumToStringConverter<EpisodeStatus>())
             |> ignore
-
-
-        let ssconvert =
-             ValueConverter<SerieStatus, string>(
-                 (fun v -> v.ToString()),
-                 (fun v -> Enum.Parse(typedefof<SerieStatus>, v) :?> SerieStatus)
-             )
 
         modelBuilder
             .Entity<Serie>()
             .Property(fun e -> e.Status)
-            .HasConversion(ssconvert)
+            .HasConversion(EnumToStringConverter<SerieStatus>())
             |> ignore
 
     [<DefaultValue>]
